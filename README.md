@@ -13,7 +13,7 @@ Instalação
 Clone o repositório:
 bash
 Copy code
-git clone https://github.com/datapro/apisinopsers-backend.git
+
 Abra o projeto em seu IDE (Ambiente de Desenvolvimento Integrado) de sua preferência.
 
 Configure sua conexão de banco de dados no arquivo.application.properties
