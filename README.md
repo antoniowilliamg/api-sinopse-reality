@@ -7,13 +7,7 @@ Para o desenvolvimento da aplicação, foram utilizadas às tecnologias e libs a
 - **MySql**: Um sistema de gerenciamento de banco de dados relacional de código aberto.
 - **Lombok**: Uma biblioteca que ajuda a reduzir a verbosidade do código Java, automatizando a geração de métodos comuns.
 
-## Configuração do Ambiente
-
-Certifique-se de ter as seguintes ferramentas instaladas em seu ambiente de desenvolvimento:
-
-- Maven
-- Git
-- IDE IntelliJ
+## Atualizações em breve
 
 
 
