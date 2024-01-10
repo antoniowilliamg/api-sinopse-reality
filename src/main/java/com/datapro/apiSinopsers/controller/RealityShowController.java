@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api-sinopse-reality/realityshows")
+@RequestMapping("/api/realityshows")
 public class RealityShowController {
     @Autowired
     private RealityShowService realityShowService;
