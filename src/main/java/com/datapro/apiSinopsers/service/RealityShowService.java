@@ -16,11 +16,11 @@ public class RealityShowService {
 
     public void cadastrarReality(RealityShowDto realityShowDto) {
         RealityShow realityShow = new RealityShow();
-        realityShow.setNome(realityShowDto.getNome());
+        realityShow.setTitulo(realityShowDto.getTitulo());
         realityShow.setSinopse(realityShowDto.getSinopse());
         realityShowRepository.save(realityShow);
-
     }
+
 
     public List<RealityShowDto> listarRealityShow(){
         List<RealityShow> realityShows = realityShowRepository.findAll();
@@ -29,7 +29,7 @@ public class RealityShowService {
         for (RealityShow realityShow : realityShows){
             RealityShowDto realityShowDto = new RealityShowDto();
             realityShowDto.setId(realityShow.getId());
-            realityShowDto.setNome(realityShow.getNome());
+            realityShowDto.setTitulo(realityShow.getTitulo());
             realityShowDto.setSinopse(realityShow.getSinopse());
             listaRealitys.add(realityShowDto);
         }
@@ -38,7 +38,7 @@ public class RealityShowService {
 
     public void atualizarReality(RealityShowDto realityShowDto){
         RealityShow realityShow = realityShowRepository.buscarPorId(realityShowDto.getId());
-        realityShow.setNome(realityShowDto.getNome());
+        realityShow.setTitulo(realityShowDto.getTitulo());
         realityShow.setSinopse(realityShowDto.getSinopse());
         realityShowRepository.save(realityShow);
     }

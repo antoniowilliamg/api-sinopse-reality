@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
+@Table(name = "tb_realityshow")
 @Data
 public class RealityShow {
 
@@ -12,11 +13,10 @@ public class RealityShow {
     @Column
     private Long id;
 
-    @Column(nullable = false)
-    private String nome;
+    @Column(nullable = false, unique = true)
+    private  String titulo;
 
     @Column(length = 1000, nullable = false, unique = true)
     private String sinopse;
-
 
 }

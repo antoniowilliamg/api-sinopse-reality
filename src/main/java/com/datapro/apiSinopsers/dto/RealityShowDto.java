@@ -7,7 +7,7 @@ public class RealityShowDto {
 
     private Long id;
 
-    private String nome;
+    private String titulo;
 
     private String sinopse;
 
