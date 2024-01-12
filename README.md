@@ -6,16 +6,11 @@ Para o desenvolvimento da aplicação, foram utilizadas às tecnologias e libs a
 Tecnologias
 Java
 Spring Boot
-Hibernação/JPA
+Spring Data
 Lombok
-Instalação
-Clone o repositório:
-bash
-Copy code
+MySql
 
-Abra o projeto em seu IDE (Ambiente de Desenvolvimento Integrado) de sua preferência.
 
-Configure sua conexão de banco de dados no arquivo.application.properties
 
 ## Atualizações em breve
 
