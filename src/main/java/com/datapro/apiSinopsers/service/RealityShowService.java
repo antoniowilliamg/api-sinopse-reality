@@ -17,7 +17,7 @@ public class RealityShowService {
 
     private static final String REALITY_NAO_ENCONTRADO = "Realityshow não encontrado!";
 
-    public ResponseEntity cadastrarReality(RealityShowDto realityShowDto) {
+    public ResponseEntity cadastrar(RealityShowDto realityShowDto) {
         String titulo =  realityShowRepository.buscarPorTitulo(realityShowDto.getTitulo());
         if (titulo == null){
             RealityShow realityShow = new RealityShow();
@@ -26,11 +26,11 @@ public class RealityShowService {
             realityShowRepository.save(realityShow);
             return ResponseEntity.status(201).body("Realityshow cadastrado com sucesso!");
         }
-       return ResponseEntity.status(409).body("Realityshow ja cadastrado seja mais criativo!");
+       return ResponseEntity.status(409).body("Realityshow ja cadastrado!");
     }
 
 
-    public List<RealityShowDto> listarRealityShow(){
+    public List<RealityShowDto> listar(){
         List<RealityShow> realityShows = realityShowRepository.findAll();
         List<RealityShowDto> listaRealitys = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class RealityShowService {
         return listaRealitys;
     }
 
-    public ResponseEntity atualizarReality(RealityShowDto realityShowDto){
+    public ResponseEntity atualizar(RealityShowDto realityShowDto){
 
         RealityShow realityShow = realityShowRepository.buscarPorId(realityShowDto.getId());
         if (realityShow != null) {
@@ -56,7 +56,7 @@ public class RealityShowService {
         return ResponseEntity.status(409).body(REALITY_NAO_ENCONTRADO);
     }
 
-    public ResponseEntity excluirReality(Long id){
+    public ResponseEntity excluir(Long id){
         RealityShow realityShow = realityShowRepository.buscarPorId(id);
         if (realityShow != null){
             realityShowRepository.deleteById(id);

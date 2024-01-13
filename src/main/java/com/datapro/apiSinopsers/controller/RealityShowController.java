@@ -17,23 +17,23 @@ public class RealityShowController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity cadastrarReality(@RequestBody RealityShowDto realityShowDto) {
-        return realityShowService.cadastrarReality(realityShowDto);
+    private ResponseEntity cadastrar(@RequestBody RealityShowDto realityShowDto) {
+        return realityShowService.cadastrar(realityShowDto);
     }
 
     @GetMapping
-    public List<RealityShowDto> listarReality() {
-        return realityShowService.listarRealityShow();
+    public List<RealityShowDto> listar() {
+        return realityShowService.listar();
     }
 
     @PutMapping
-    public ResponseEntity atualizarReality(@RequestBody RealityShowDto realityShowDto) {
-        return realityShowService.atualizarReality(realityShowDto);
+    public ResponseEntity atualizar(@RequestBody RealityShowDto realityShowDto) {
+        return realityShowService.atualizar(realityShowDto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity excluirReality(@PathVariable Long id) {
-        return realityShowService.excluirReality(id);
+    public ResponseEntity excluir(@PathVariable Long id) {
+        return realityShowService.excluir(id);
     }
 }
