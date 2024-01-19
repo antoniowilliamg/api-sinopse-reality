@@ -22,6 +22,7 @@ public class RealityShowController {
     }
 
     @GetMapping
+    @ResponseBody
     public List<RealityShowDto> listar() {
         return realityShowService.listar();
     }
