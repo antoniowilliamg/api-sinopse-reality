@@ -2,11 +2,13 @@ package com.datapro.apiSinopsers.service;
 
 import com.datapro.apiSinopsers.dto.EpisodioDto;
 import com.datapro.apiSinopsers.model.Episodio;
+import com.datapro.apiSinopsers.model.Temporada;
 import com.datapro.apiSinopsers.repository.EpisodioRepository;
+import com.datapro.apiSinopsers.repository.TemporadaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,61 +17,52 @@ import java.util.List;
 public class EpisodioService {
     @Autowired
     private EpisodioRepository episodioRepository;
+    @Autowired
+    private TemporadaRepository temporadaRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    private static final String REALITY_NAO_ENCONTRADO = "Episodio não encontrado!";
+    private static final String EPISODIO_NAO_ENCONTRADO = "Episodio não encontrado!";
 
-
-    public ResponseEntity cadastrar(@RequestBody EpisodioDto episodioDto) {
-        String nome = episodioRepository.BuscarPorNome(episodioDto.getNome());
-        if (nome == null) {
-            Episodio episodio = new Episodio();
-            episodio.setNome(episodioDto.getNome());
-            episodio.setDescricao(episodioDto.getDescricao());
-            episodio.setNumeroDoEpisodio(episodioDto.getNumeroDoEpisodio());
+    public ResponseEntity cadastrar(EpisodioDto episodioDto) {
+        String nome =  episodioRepository.buscarPorNome(episodioDto.getNome());
+        Temporada temporada = temporadaRepository.buscarPorCodigo(episodioDto.getCod_temporada());
+        if (nome == null){
+            Episodio episodio = modelMapper.map(episodioDto, Episodio.class );
+            episodio.setTemporada(temporada);
             episodioRepository.save(episodio);
-            return ResponseEntity.status(201).body("Realityshow cadastrado com sucesso!");
+            return ResponseEntity.status(201).body("Episodio cadastrado com sucesso!");
         }
-        return ResponseEntity.status(409).body("Realityshow ja cadastrado seja mais criativo!");
+        return ResponseEntity.status(409).body("Episodio ja cadastrado!");
     }
-
     public List<EpisodioDto> listar() {
-        List<Episodio> Episodios = episodioRepository.findAll();
+        List<Episodio> episodios = episodioRepository.findAll();
         List<EpisodioDto> listaEpisodios = new ArrayList<>();
 
-        for (Episodio episodio : Episodios){
-            EpisodioDto episodioDto = new EpisodioDto();
-            episodioDto.setId(episodio.getId());
-            episodioDto.setNome(episodio.getNome());
-            episodioDto.setDescricao(episodio.getDescricao());
-            episodioDto.setNumeroDoEpisodio(episodio.getNumeroDoEpisodio());
+        for (Episodio episodio : episodios) {
+            EpisodioDto episodioDto = modelMapper.map(episodio, EpisodioDto.class );
             listaEpisodios.add(episodioDto);
         }
         return listaEpisodios;
     }
-
-
-    public ResponseEntity atualizar(EpisodioDto episodioDto) {
-
-        Episodio episodio = episodioRepository.buscarPorId(episodioDto.getId());
+    public ResponseEntity atualizar(EpisodioDto episodioDto){
+        Episodio episodio = episodioRepository.buscarPorCodigo(episodioDto.getCod_episodio());
         if (episodio != null) {
-            episodio.setNome(episodioDto.getNome());
-            episodio.setDescricao(episodioDto.getDescricao());
-            episodio.setNumeroDoEpisodio(episodioDto.getNumeroDoEpisodio());
+            episodio = modelMapper.map(episodioDto, Episodio.class );
             episodioRepository.save(episodio);
-            return ResponseEntity.status(200).body("Realityshow atualizado com sucesso!");
+            return ResponseEntity.status(200).body("Episodio atualizado com sucesso!");
         }
-        return ResponseEntity.status(409).body(REALITY_NAO_ENCONTRADO);
+        return ResponseEntity.status(409).body(EPISODIO_NAO_ENCONTRADO);
     }
-
-    public ResponseEntity excluir(Long id) {
-        Episodio episodio = episodioRepository.buscarPorId(id);
+    public ResponseEntity excluir(Long cod_episodio){
+        Episodio episodio = episodioRepository.buscarPorCodigo(cod_episodio);
         if (episodio != null){
-            episodioRepository.deleteById(id);
+            episodioRepository.deleteById(cod_episodio);
             return ResponseEntity.status(204).body("Episodio deletado com sucesso!");
         }
 
-        return ResponseEntity.status(409).body(REALITY_NAO_ENCONTRADO);
+        return ResponseEntity.status(409).body(EPISODIO_NAO_ENCONTRADO);
     }
-}
 
+}
 

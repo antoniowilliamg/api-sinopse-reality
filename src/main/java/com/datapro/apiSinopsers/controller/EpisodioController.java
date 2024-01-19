@@ -1,8 +1,6 @@
 package com.datapro.apiSinopsers.controller;
 
 import com.datapro.apiSinopsers.dto.EpisodioDto;
-import com.datapro.apiSinopsers.model.Episodio;
-import com.datapro.apiSinopsers.repository.EpisodioRepository;
 import com.datapro.apiSinopsers.service.EpisodioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/episodios")
+@RequestMapping("/api/episodios")
 public class EpisodioController {
+
     @Autowired
     private EpisodioService episodioService;
 
